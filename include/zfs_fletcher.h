@@ -86,6 +86,9 @@ typedef struct zfs_fletcher_aarch64_neon {
 	uint64_t v[2] __attribute__((aligned(16)));
 } zfs_fletcher_aarch64_neon_t;
 
+typedef struct zfs_fletcher_powerpc_vsx {
+        uint64_t v[2] __attribute__((aligned(16)));
+} zfs_fletcher_powerpc_vsx_t;
 
 typedef union fletcher_4_ctx {
 	zio_cksum_t scalar;
@@ -102,6 +105,9 @@ typedef union fletcher_4_ctx {
 #endif
 #if defined(__aarch64__)
 	zfs_fletcher_aarch64_neon_t aarch64_neon[4];
+#endif
+#if defined(__powerpc64__)
+        zfs_fletcher_powerpc_vsx_t powerpc_vsx[4];
 #endif
 } fletcher_4_ctx_t;
 
@@ -149,6 +155,10 @@ extern const fletcher_4_ops_t fletcher_4_avx512bw_ops;
 
 #if defined(__aarch64__)
 extern const fletcher_4_ops_t fletcher_4_aarch64_neon_ops;
+#endif
+
+#if defined(__powerpc64__)
+extern const fletcher_4_ops_t fletcher_4_powerpc_vsx_ops;
 #endif
 
 #ifdef	__cplusplus

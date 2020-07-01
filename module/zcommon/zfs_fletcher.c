@@ -190,6 +190,9 @@ static const fletcher_4_ops_t *fletcher_4_impls[] = {
 #if defined(__aarch64__)
 	&fletcher_4_aarch64_neon_ops,
 #endif
+#if defined(__powerpc64__)
+	&fletcher_4_powerpc_vsx_ops,
+#endif
 };
 
 /* Hold all supported implementations */
